@@ -8,13 +8,8 @@ import br.com.vinipaulino.modelo.Veiculo;
 
 public class VeiculoRn {
 	
-	
-	public VeiculoRn() {
-		
+	public VeiculoRn() {	
 	}
-	
-	private List<Veiculo> veiculos;
-
 	
 	public void gravarVeiculo(Veiculo veiculo) {
 		System.out.println("tipo do Veiculo" + veiculo.getTipoVeiculo());
@@ -30,7 +25,6 @@ public class VeiculoRn {
 	}
 
 	public void setVeiculos(List<Veiculo> veiculos) {
-		this.veiculos = veiculos;
 	}
 
 	public void remove(Veiculo veiculo) {
