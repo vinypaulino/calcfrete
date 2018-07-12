@@ -9,7 +9,7 @@
 </h:head>
 
 <h:body>
-	<h:form>
+	<h:form id="formVeiculo">
 		<p:panel id="panel" header="Dados do veículo">
 			<p:focus context="panel" />
 			<h:messages />
@@ -27,10 +27,40 @@
 				<p:message for="fatorMultiplicador" />
 			</h:panelGrid>
 
-			<p:commandButton id="submitButton" value="Salvar" update="@parent" action="#{veiculoBean.gravar}"
-			 icon="ui-icon-disk" />
+			<p:commandButton id="submitButton" value="Salvar" update="@parent :formTabelaVeiculos:tabelaVeiculos"  action="#{veiculoBean.gravar}"
+			 icon="ui-icon-disk"  />
 			
 		</p:panel>
+	</h:form>
+	<h1>Veículos Cadastrados</h1>
+		<h:form id="formTabelaVeiculos">
+		<p:dataTable var="veiculo" id="tabelaVeiculos"
+			value="#{veiculoBean.veiculos}">
+			<p:column>
+				<f:facet name="header">TipoVeiculo</f:facet>
+				<h:outputText value="#{veiculo.tipoVeiculo}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Fator Multiplicador</f:facet>
+				<h:outputText value="#{veiculo.fatorValor}">
+					<f:convertNumber type="currency" pattern="R$ #0.00"
+						currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
+			</p:column>
+
+			<p:column style=" width:10%">
+				<f:facet name="header">Alterar</f:facet>
+				<h:commandButton value="Alterar"
+					action="#{veiculoBean.carregar(veiculo)}" />
+			</p:column>
+
+			<p:column style=" width:8%">
+				<f:facet name="header">Remover</f:facet>
+				<h:commandButton value="X"
+					action="#{veiculoBean.remover(veiculo)}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 
 </h:body>
