@@ -1,5 +1,7 @@
 package br.com.vinipaulino.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -7,14 +9,20 @@ import br.com.vinipaulino.modelo.Veiculo;
 
 @ManagedBean
 @ViewScoped
-public class VeiculoBean {
+public class VeiculoBean implements Serializable {
 	
+	
+	private static final long serialVersionUID = 1L;
+	private VeiculoRn veiculoRn;
 	private Veiculo veiculo = new Veiculo();
-
 	
-	public void gravar() {
-		VeiculoRn veiculoRN = new VeiculoRn();
-		veiculoRN.gravarVeiculo(this.veiculo);	
+	
+	public VeiculoBean() {
+		this.veiculoRn = new VeiculoRn();
+	}
+	
+	public void gravar() {		
+		veiculoRn.gravarVeiculo(this.veiculo);	
 		this.veiculo = new Veiculo();
 	}
 	
