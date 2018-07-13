@@ -11,7 +11,7 @@ public class Veiculo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@Column(nullable = false)
 	private String tipoVeiculo;
@@ -38,7 +38,7 @@ public class Veiculo {
 		this.fatorValor = fatorValor;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 

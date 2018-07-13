@@ -35,7 +35,6 @@ public class CalculoFreteRn {
 		return custoPercurso;
 	}
 
-	
 	public Frete getCalculoFrete() {
 		return frete;
 	}
@@ -43,5 +42,6 @@ public class CalculoFreteRn {
 	public void setCalculoFrete(Frete frete) {
 		this.frete = frete;
 	}
+	
 
 }

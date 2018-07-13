@@ -3,42 +3,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-</h:head>
 
-<h:body>
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+		Calcular Frete
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
 
-	<h1>Calcula Frete</h1>
-	<h:form>
-		<h:messages />
-		<p:panel id="panel" header="Preencha os dados para o calculo">
-			
-			<h:panelGrid columns="2">
+			<p:messages />
+			<p:panel id="panel" header="Preencha os dados para o calculo">
 
-				<h:outputLabel value="Distancia Pavimentada" for="distPavimentada" />
-				<p:inputText id="distPavimentada" value="" />
+				<h:panelGrid columns="3">
 
-				<h:outputLabel value="Distancia Não Pavimentada"
-					for="distNaoPavimentada" />
-				<p:inputText id="distNaoPavimentada" />
+					<p:outputLabel value="Distancia Pavimentada (Km):"
+						for="distPavimentada" />
+					<p:inputNumber id="distPavimentada" required="true"
+						value="#{calculoBean.distanciaPavimentada}" />
+					<p:message for="distPavimentada" />
 
-				<h:outputLabel value="Veículo Utilizado" />
-				<h:selectOneMenu value="#{calculoBean.veiculoId}">
-					<f:selectItems value="#{calculoBean.veiculos}" var="veiculo"
-						itemLabel="#{veiculo.tipoVeiculo}" itemValue="#{veiculo.id}" />
-				</h:selectOneMenu>
+					<p:outputLabel value="Distancia Não Pavimentada (Km):"
+						for="distNaoPavimentada" />
+					<p:inputNumber id="distNaoPavimentada" required="true"
+						value="#{calculoBean.distanciaNaoPavimentada}" />
+					<p:message for="distNaoPavimentada" />
 
-				<h:outputLabel value="Peso da Carga Transportada" for="pesoCarga" />
-				<p:inputText id="pesoCarga" required="true" />
+					<p:outputLabel value="Veículo Utilizado: " />
+					<p:selectOneMenu value="#{calculoBean.veiculoId}">
+						<f:selectItems value="#{calculoBean.veiculos}" var="veiculo"
+							itemLabel="#{veiculo.tipoVeiculo}" itemValue="#{veiculo.id}" />
+					</p:selectOneMenu>
+					<p:column />
 
-				<p:commandButton value="Calcular" action="#{calculoBean.calcular}">
-				</p:commandButton>
+					<p:outputLabel value="Peso da Carga Transportada" for="pesoCarga" />
+					<p:inputText id="pesoCarga" required="true"
+						value="#{calculoBean.pesoCargaTransportada}" />
+					<p:message for="distNaoPavimentada" />
+					<p:commandButton value="Calcular" icon="ui-icon-calculator"
+						actionListener="#{calculoBean.calcular}" update="@form"
+						process="@form">
+					</p:commandButton>
 
-			</h:panelGrid>
-		</p:panel>
-	</h:form>
+				</h:panelGrid>
+			</p:panel>
 
-</h:body>
+			<p:outputLabel value="#{calculoBean.valorCusto}" />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

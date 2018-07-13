@@ -1,4 +1,4 @@
-package br.com.vinipaulino.bean;
+package br.com.vinipaulino.rn;
 
 
 import java.util.List;
@@ -29,8 +29,9 @@ public class VeiculoRn {
 
 	public void remove(Veiculo veiculo) {
 		new DAO<Veiculo>(Veiculo.class).remove(veiculo);
-		
 	}
-
-
+	
+	public Veiculo getVeiculoPorId(Integer id) {
+		return new DAO<Veiculo>(Veiculo.class).buscaPorId(id);
+	}
 }

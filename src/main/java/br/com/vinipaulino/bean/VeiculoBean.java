@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 
 import br.com.vinipaulino.modelo.Veiculo;
+import br.com.vinipaulino.rn.VeiculoRn;
 
 @ManagedBean
 @ViewScoped
