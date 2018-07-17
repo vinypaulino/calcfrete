@@ -10,7 +10,6 @@ public class CalculoFreteRn {
 	private int pesoExcedido;
 
 	public CalculoFreteRn(Frete frete, Configuracao config) {
-		// testar frete nulo
 		this.frete = frete;
 		this.config = config;
 	}
@@ -18,21 +17,37 @@ public class CalculoFreteRn {
 	public double calculaFrete() {
 		
 		if (frete.getDistanciaPavimentada() > 0) {
-			custoPercurso = frete.getDistanciaPavimentada() * config.getValorViaPavimentada();
+			custoPercurso = calculaDistanciaPavimentada();
 		}
 
 		if (frete.getDistanciaNaoPavimentada() > 0) {
-			custoPercurso += frete.getDistanciaNaoPavimentada() * config.getValorViaNaoPavimentada();
+			custoPercurso += calculaDistanciaNaoPavimentada();
 		}
 		
-		custoPercurso = custoPercurso * frete.getVeiculo().getFatorValor();
+		custoPercurso = calculaCustoPorValorVeiculo();
 		
 		if (frete.getCargaTransportada() > config.getToneladaMinima()) {
 			 pesoExcedido = frete.getCargaTransportada() - config.getToneladaMinima();
-			 custoPercurso += (pesoExcedido * config.getTaxaCustoCarga()) * (frete.getDistanciaPavimentada() + frete.getDistanciaNaoPavimentada());
+			 custoPercurso += caculaCustoPesoExcedido();
 		} 
 		 
 		return custoPercurso;
+	}
+
+	private double calculaCustoPorValorVeiculo() {
+		return custoPercurso * frete.getVeiculo().getFatorValor();
+	}
+
+	private double caculaCustoPesoExcedido() {
+		return (pesoExcedido * config.getTaxaCustoCarga()) * (frete.getDistanciaPavimentada() + frete.getDistanciaNaoPavimentada());
+	}
+
+	private double calculaDistanciaNaoPavimentada() {
+		return frete.getDistanciaNaoPavimentada() * config.getValorViaNaoPavimentada();
+	}
+
+	private double calculaDistanciaPavimentada() {
+		return frete.getDistanciaPavimentada() * config.getValorViaPavimentada();
 	}
 
 	public Frete getCalculoFrete() {
@@ -43,5 +58,4 @@ public class CalculoFreteRn {
 		this.frete = frete;
 	}
 	
-
 }
